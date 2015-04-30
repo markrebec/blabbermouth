@@ -1,0 +1,2 @@
+module Blabbermouth
+end
