@@ -49,8 +49,6 @@ module Blabbermouth
       false
     end
 
-    # TODO maybe use method_missing for these to allow passing through
-    # custom methods to your custom gawkers
     def error(key, e, *args, data: {})
       gawkers.each { |gawker| gawker.error key, e, *args, data: data }
     end
@@ -68,8 +66,25 @@ module Blabbermouth
     end
 
     def time(key, duration=nil, *args, data: {}, &block)
-      # TODO time the block if it exists and duration is not provided
+      raise "Blabbermouth::Blabber.time requires a duration or block" if duration.nil? && !block_given?
+      if block_given?
+        start_time = ::Time.now
+        yielded = yield
+        duration = (::Time.now - start_time).to_f
+      end
+
       gawkers.each { |gawker| gawker.time key, duration, *args, data: data }
+    end
+
+    def method_missing(meth, *args, &block)
+      gawkers.each do |gawker|
+        next unless gawker.respond_to?(meth)
+        gawker.send(meth, *args, &block)
+      end
+    end
+
+    def respond_to_missing?(meth, include_private=false)
+      gawkers.any? { |gawker| gawker.respond_to?(meth, include_private) }
     end
 
     protected

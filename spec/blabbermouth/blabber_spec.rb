@@ -72,6 +72,16 @@ RSpec.describe Blabbermouth::Blabber do
     end
   end
 
+  describe '#method_missing' do
+    context 'when added gawkers respond to the requested method' do
+      it 'passes method calls through to added gawkers' do
+        subject.add_gawker!(:test)
+        subject.test('key', 'test')
+        expect(Blabbermouth::Gawkers::Test.logged?(:test, 'key', 'test')).to be_true
+      end
+    end
+  end
+
   describe '.error' do
     it 'blabs to any provided gawkers' do
       Blabbermouth::Blabber.error('key', StandardError.new, :test, :rails)
