@@ -12,10 +12,8 @@ Gem::Specification.new do |s|
   s.test_files  = Dir["spec/**/*"]
   s.homepage    = "http://github.com/markrebec/blabbermouth"
 
-  s.add_development_dependency "activerecord"
-  s.add_development_dependency "sqlite3"
+  s.add_dependency "activesupport"
+
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec"
-  s.add_development_dependency "factory_girl"
-  s.add_development_dependency "faker"
 end

@@ -1,11 +1,8 @@
-require 'active_record'
+require 'active_support/core_ext/string'
 require 'blabbermouth'
-require 'factory_girl'
-require 'faker'
 require 'rspec'
 
 Dir[File.join(File.dirname(__FILE__), '..', "spec/support/**/*.rb")].each { |f| require f }
-Dir[File.join(File.dirname(__FILE__), '..', "spec/factories/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
   #config.before(:suite) do
@@ -14,20 +11,6 @@ RSpec.configure do |config|
   #  load 'support/models.rb'
   #end
   
-  # Using Factory Girl instead of fixtures
-  config.include FactoryGirl::Syntax::Methods
-  # Lint your factories before running the suite to find any errors up front
-  config.before(:suite) do
-    ActiveRecord::Base.transaction do
-      begin
-        FactoryGirl.lint
-      rescue FactoryGirl::InvalidFactoryError => e
-        puts e.message
-      end
-      raise ActiveRecord::Rollback
-    end
-  end
-
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
