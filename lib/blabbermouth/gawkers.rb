@@ -4,6 +4,7 @@ module Blabbermouth
 end
 
 require 'blabbermouth/gawkers/base'
+require 'blabbermouth/gawkers/stdout'
 require 'blabbermouth/gawkers/rails'
 require 'blabbermouth/gawkers/rollbar'
 require 'blabbermouth/gawkers/librato'
