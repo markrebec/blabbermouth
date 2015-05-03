@@ -24,100 +24,90 @@ RSpec.describe Blabbermouth::Blabber do
 
   describe '#error' do
     it 'blabs to any added gawkers' do
-      subject.add_gawker!(:rollbar)
+      subject.add_gawker!(:test)
       subject.add_gawker!(:rails)
       subject.error('key', StandardError.new)
-      error = ::Rollbar.errors.last
-      expect(error[0]).to be_an_instance_of(Blabbermouth::Error)
+      expect(Blabbermouth::Gawkers::Test.logged?(:error, 'key', StandardError.new.message)).to be_true
       expect(Rails.logger.errors).to include(Blabbermouth::Gawkers::Rails.new.send(:log_message, :error, 'key', StandardError.new))
     end
   end
 
   describe '#info' do
     it 'blabs to any added gawkers' do
-      subject.add_gawker!(:rollbar)
+      subject.add_gawker!(:test)
       subject.add_gawker!(:rails)
       subject.info('key', 'test')
-      info = ::Rollbar.infos.last
-      expect(info[0]).to be_an_instance_of(Blabbermouth::Info)
+      expect(Blabbermouth::Gawkers::Test.logged?(:info, 'key', 'test')).to be_true
       expect(Rails.logger.infos).to include(Blabbermouth::Gawkers::Rails.new.send(:log_message, :info, 'key', 'test'))
     end
   end
 
   describe '#increment' do
     it 'blabs to any added gawkers' do
-      subject.add_gawker!(:rollbar)
+      subject.add_gawker!(:test)
       subject.add_gawker!(:rails)
       subject.increment('key', 1)
-      info = ::Rollbar.infos.last
-      expect(info[0]).to be_an_instance_of(Blabbermouth::Increment)
+      expect(Blabbermouth::Gawkers::Test.logged?(:increment, 'key', 1)).to be_true
       expect(Rails.logger.infos).to include(Blabbermouth::Gawkers::Rails.new.send(:log_message, :increment, 'key', 1))
     end
   end
 
   describe '#count' do
     it 'blabs to any added gawkers' do
-      subject.add_gawker!(:rollbar)
+      subject.add_gawker!(:test)
       subject.add_gawker!(:rails)
       subject.count('key', 1)
-      info = ::Rollbar.infos.last
-      expect(info[0]).to be_an_instance_of(Blabbermouth::Count)
+      expect(Blabbermouth::Gawkers::Test.logged?(:count, 'key', 1)).to be_true
       expect(Rails.logger.infos).to include(Blabbermouth::Gawkers::Rails.new.send(:log_message, :count, 'key', 1))
     end
   end
 
   describe '#time' do
     it 'blabs to any added gawkers' do
-      subject.add_gawker!(:rollbar)
+      subject.add_gawker!(:test)
       subject.add_gawker!(:rails)
       subject.time('key', 1)
-      info = ::Rollbar.infos.last
-      expect(info[0]).to be_an_instance_of(Blabbermouth::Time)
+      expect(Blabbermouth::Gawkers::Test.logged?(:time, 'key', 1)).to be_true
       expect(Rails.logger.infos).to include(Blabbermouth::Gawkers::Rails.new.send(:log_message, :time, 'key', 1))
     end
   end
 
   describe '.error' do
     it 'blabs to any provided gawkers' do
-      Blabbermouth::Blabber.error('key', StandardError.new, :rollbar, :rails)
-      error = ::Rollbar.errors.last
-      expect(error[0]).to be_an_instance_of(Blabbermouth::Error)
+      Blabbermouth::Blabber.error('key', StandardError.new, :test, :rails)
+      expect(Blabbermouth::Gawkers::Test.logged?(:error, 'key', StandardError.new.message)).to be_true
       expect(Rails.logger.errors).to include(Blabbermouth::Gawkers::Rails.new.send(:log_message, :error, 'key', StandardError.new))
     end
   end
 
   describe '.info' do
     it 'blabs to any provided gawkers' do
-      Blabbermouth::Blabber.info('key', 'test', :rollbar, :rails)
-      info = ::Rollbar.infos.last
-      expect(info[0]).to be_an_instance_of(Blabbermouth::Info)
+      Blabbermouth::Blabber.info('key', 'test', :test, :rails)
+      expect(Blabbermouth::Gawkers::Test.logged?(:info, 'key', 'test')).to be_true
       expect(Rails.logger.infos).to include(Blabbermouth::Gawkers::Rails.new.send(:log_message, :info, 'key', 'test'))
     end
   end
 
   describe '.increment' do
     it 'blabs to any provided gawkers' do
-      Blabbermouth::Blabber.increment('key', 1, :rollbar, :rails)
-      info = ::Rollbar.infos.last
-      expect(info[0]).to be_an_instance_of(Blabbermouth::Increment)
+      Blabbermouth::Blabber.increment('key', 1, :test, :rails)
+      expect(Blabbermouth::Gawkers::Test.logged?(:increment, 'key', 1)).to be_true
       expect(Rails.logger.infos).to include(Blabbermouth::Gawkers::Rails.new.send(:log_message, :increment, 'key', 1))
     end
   end
 
   describe '.count' do
     it 'blabs to any provided gawkers' do
-      Blabbermouth::Blabber.count('key', 1, :rollbar, :rails)
-      info = ::Rollbar.infos.last
-      expect(info[0]).to be_an_instance_of(Blabbermouth::Count)
+      Blabbermouth::Blabber.count('key', 1, :test, :rails)
+      expect(Blabbermouth::Gawkers::Test.logged?(:count, 'key', 1)).to be_true
       expect(Rails.logger.infos).to include(Blabbermouth::Gawkers::Rails.new.send(:log_message, :count, 'key', 1))
     end
   end
 
   describe '.time' do
     it 'blabs to any provided gawkers' do
-      Blabbermouth::Blabber.time('key', 1, :rollbar, :rails)
-      info = ::Rollbar.infos.last
-      expect(info[0]).to be_an_instance_of(Blabbermouth::Time)
+      Blabbermouth::Blabber.time('key', 1, :test, :rails)
+      expect(Blabbermouth::Gawkers::Test.logged?(:time, 'key', 1)).to be_true
       expect(Rails.logger.infos).to include(Blabbermouth::Gawkers::Rails.new.send(:log_message, :time, 'key', 1))
     end
   end
