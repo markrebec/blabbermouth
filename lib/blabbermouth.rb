@@ -26,8 +26,8 @@ module Blabbermouth
     blabber(*gawkers).count(key, total, data: {})
   end
 
-  def self.time(key, duration=nil, *gawkers, data: {})
+  def self.time(key, duration=nil, *gawkers, data: {}, &block)
     raise "Blabbermouth.time requires a duration or block" if duration.nil? && !block_given?
-    blabber(*gawkers).time(key, duration, data: {})
+    blabber(*gawkers).time(key, duration, data: {}, &block)
   end
 end
