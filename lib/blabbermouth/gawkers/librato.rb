@@ -1,28 +1,33 @@
 module Blabbermouth
   module Gawkers
     class Librato < Base
-      def error(key, e, *args, data: {})
+      def error(key, e, *args)
+        data, opts, args = parse_args(*args)
         librato!
         ::Librato.increment(key)
       end
 
-      def info(key, msg=nil, *args, data: {})
+      def info(key, msg=nil, *args)
+        data, opts, args = parse_args(*args)
         librato_metrics!
         ::Librato::Metrics.annotate(key, msg)
       end
 
-      def increment(key, by=1, *args, data: {})
+      def increment(key, by=1, *args)
+        data, opts, args = parse_args(*args)
         librato!
         ::Librato.increment(key, by: by)
       end
 
-      def count(key, total, *args, data: {})
+      def count(key, total, *args)
+        data, opts, args = parse_args(*args)
         librato!
         ::Librato.measure(key, total)
       end
       alias_method :gauge, :count
 
-      def time(key, duration, *args, data: {})
+      def time(key, duration, *args)
+        data, opts, args = parse_args(*args)
         librato!
         ::Librato.timing(key, duration)
       end

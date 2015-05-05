@@ -1,4 +1,5 @@
 require 'active_support/core_ext/module/attribute_accessors'
+require 'active_support/core_ext/array/extract_options'
 require 'active_support/core_ext/string'
 require 'blabbermouth/configuration'
 require 'blabbermouth/gawkers'
@@ -20,24 +21,34 @@ module Blabbermouth
     blabber *gawkers
   end
 
-  def self.error(key, e, *gawkers, data: {})
-    blabber(*gawkers).error(key, e, data: {})
+  def self.error(key, e, *args)
+    opts = args.extract_options!
+    gawkers = args.concat([opts.slice!(:data)])
+    blabber(*gawkers).error(key, e, opts)
   end
 
-  def self.info(key, msg=nil, *gawkers, data: {})
-    blabber(*gawkers).info(key, msg, data: {})
+  def self.info(key, msg=nil, *args)
+    opts = args.extract_options!
+    gawkers = args.concat([opts.slice!(:data)])
+    blabber(*gawkers).info(key, msg, opts)
   end
 
-  def self.increment(key, by=1, *gawkers, data: {})
-    blabber(*gawkers).increment(key, by, data: {})
+  def self.increment(key, by=1, *args)
+    opts = args.extract_options!
+    gawkers = args.concat([opts.slice!(:data)])
+    blabber(*gawkers).increment(key, by, opts)
   end
 
-  def self.count(key, total, *gawkers, data: {})
-    blabber(*gawkers).count(key, total, data: {})
+  def self.count(key, total, *args)
+    opts = args.extract_options!
+    gawkers = args.concat([opts.slice!(:data)])
+    blabber(*gawkers).count(key, total, opts)
   end
 
-  def self.time(key, duration=nil, *gawkers, data: {}, &block)
+  def self.time(key, duration=nil, *args, &block)
     raise "Blabbermouth.time requires a duration or block" if duration.nil? && !block_given?
-    blabber(*gawkers).time(key, duration, data: {}, &block)
+    opts = args.extract_options!
+    gawkers = args.concat([opts.slice!(:data)])
+    blabber(*gawkers).time(key, duration, opts, &block)
   end
 end
