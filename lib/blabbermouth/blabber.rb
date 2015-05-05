@@ -50,19 +50,19 @@ module Blabbermouth
     end
 
     def error(key, e, *args, data: {})
-      gawkers.each { |gawker| gawker.error key, e, *args, data: data }
+      gawkers.map { |gawker| gawker.error key, e, *args, data: data }
     end
 
     def info(key, msg=nil, *args, data: {})
-      gawkers.each { |gawker| gawker.info key, msg, *args, data: data }
+      gawkers.map { |gawker| gawker.info key, msg, *args, data: data }
     end
 
     def increment(key, by=1, *args, data: {})
-      gawkers.each { |gawker| gawker.increment key, by, *args, data: data }
+      gawkers.map { |gawker| gawker.increment key, by, *args, data: data }
     end
 
     def count(key, total, *args, data: {})
-      gawkers.each { |gawker| gawker.count key, total, *args, data: data }
+      gawkers.map { |gawker| gawker.count key, total, *args, data: data }
     end
 
     def time(key, duration=nil, *args, data: {}, &block)
@@ -73,7 +73,7 @@ module Blabbermouth
         duration = (::Time.now - start_time).to_f
       end
 
-      gawkers.each { |gawker| gawker.time key, duration, *args, data: data }
+      gawkers.map { |gawker| gawker.time key, duration, *args, data: data }
     end
 
     def method_missing(meth, *args, &block)
