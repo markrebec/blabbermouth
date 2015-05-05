@@ -23,33 +23,22 @@ module Blabbermouth
   end
 
   def self.error(key, e, *args)
-    opts = args.extract_options!
-    gawkers = args.concat([opts.slice!(:data)])
-    blabber(*gawkers).error(key, e, opts)
+    Blabbermouth::Blabber.error key, e, *args
   end
 
   def self.info(key, msg=nil, *args)
-    opts = args.extract_options!
-    gawkers = args.concat([opts.slice!(:data)])
-    blabber(*gawkers).info(key, msg, opts)
+    Blabbermouth::Blabber.info key, msg, *args
   end
 
   def self.increment(key, by=1, *args)
-    opts = args.extract_options!
-    gawkers = args.concat([opts.slice!(:data)])
-    blabber(*gawkers).increment(key, by, opts)
+    Blabbermouth::Blabber.increment key, by, *args
   end
 
   def self.count(key, total, *args)
-    opts = args.extract_options!
-    gawkers = args.concat([opts.slice!(:data)])
-    blabber(*gawkers).count(key, total, opts)
+    Blabbermouth::Blabber.count key, total, *args
   end
 
   def self.time(key, duration=nil, *args, &block)
-    raise "Blabbermouth.time requires a duration or block" if duration.nil? && !block_given?
-    opts = args.extract_options!
-    gawkers = args.concat([opts.slice!(:data)])
-    blabber(*gawkers).time(key, duration, opts, &block)
+    Blabbermouth::Blabber.time key, duration, *args, &block
   end
 end
