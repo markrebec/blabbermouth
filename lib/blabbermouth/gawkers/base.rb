@@ -27,7 +27,7 @@ module Blabbermouth
       # parse_args(*args) { |data, opts, args| ... }
       def parse_args(*args, &block)
         opts = args.extract_options!
-        data = opts[:data] || {}
+        data = opts.delete(:data) || {}
         if block_given?
           yield data, opts, args
         else

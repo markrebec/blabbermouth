@@ -93,7 +93,7 @@ module Blabbermouth
     end
 
     def method_missing(meth, *args, &block)
-      gawkers.each do |gawker|
+      gawkers.map do |gawker|
         next unless gawker.respond_to?(meth)
         gawker.send(meth, *args, &block)
       end
