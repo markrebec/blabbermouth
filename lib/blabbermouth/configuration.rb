@@ -1,7 +1,6 @@
 module Blabbermouth
   class Configuration
     DEFAULT_CONFIGURATION_OPTIONS = {
-      do_something: true
     }
 
     attr_reader *DEFAULT_CONFIGURATION_OPTIONS.keys

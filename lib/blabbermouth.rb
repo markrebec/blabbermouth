@@ -1,7 +1,16 @@
+require 'active_support/core_ext/module/attribute_accessors'
+require 'blabbermouth/configuration'
 require 'blabbermouth/gawkers'
 require 'blabbermouth/blabber'
 
 module Blabbermouth
+  mattr_reader :configuration
+  @@configuration = Blabbermouth::Configuration.new
+
+  def self.configure(&block)
+    @@configuration.configure &block
+  end
+
   def self.blabber(*gawkers)
     Blabbermouth::Blabber.new *gawkers
   end
