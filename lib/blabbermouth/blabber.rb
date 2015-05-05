@@ -11,7 +11,7 @@ module Blabbermouth
         new(*gawkers).info(key, msg, data: data)
       end
 
-      def increment(key, by, *gawkers, data: {})
+      def increment(key, by=1, *gawkers, data: {})
         new(*gawkers).increment(key, by, data: data)
       end
 
@@ -57,7 +57,7 @@ module Blabbermouth
       gawkers.each { |gawker| gawker.info key, msg, *args, data: data }
     end
 
-    def increment(key, by, *args, data: {})
+    def increment(key, by=1, *args, data: {})
       gawkers.each { |gawker| gawker.increment key, by, *args, data: data }
     end
 

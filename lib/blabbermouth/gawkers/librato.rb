@@ -2,29 +2,35 @@ module Blabbermouth
   module Gawkers
     class Librato < Base
       def error(key, e, *args, data: {})
-        super
+        librato!
+        ::Librato.increment(key)
       end
 
       def info(key, msg=nil, *args, data: {})
-        super
+        librato_metrics!
+        ::Librato::Metrics.annotate(key, msg)
       end
 
-      def increment(key, count, *args, data: {})
-        super
+      def increment(key, by=1, *args, data: {})
+        librato!
+        ::Librato.increment(key, by: by)
       end
 
       def count(key, total, *args, data: {})
-        super
+        librato!
+        ::Librato.measure(key, total)
       end
+      alias_method :gauge, :count
 
-      def time(key, duration=nil, *args, data: {})
-        super
+      def time(key, duration, *args, data: {})
+        librato!
+        ::Librato.timing(key, duration)
       end
 
       def flush
         librato!
         begin
-          Librato.tracker.flush
+          ::Librato.tracker.flush
         rescue => e
           false
         end
@@ -41,11 +47,11 @@ module Blabbermouth
       end
 
       def librato!
-        raise "You must require and configure the librato gem to use it as a gawker" unless librato?
+        raise "You must require and configure the librato-metrics gem to use it as a gawker" unless librato?
       end
 
       def librato_metrics!
-        raise "You must require and configure the librato_metrics gem to use it as a gawker" unless librato_metrics?
+        raise "You must require and configure the librato-metrics gem to use it as a gawker" unless librato_metrics?
       end
     end
   end

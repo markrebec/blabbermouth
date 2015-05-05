@@ -28,7 +28,7 @@ module Blabbermouth
     blabber(*gawkers).info(key, msg, data: {})
   end
 
-  def self.increment(key, by, *gawkers, data: {})
+  def self.increment(key, by=1, *gawkers, data: {})
     blabber(*gawkers).increment(key, by, data: {})
   end
 
