@@ -1,6 +1,7 @@
 require 'active_support/core_ext/module/attribute_accessors'
 require 'active_support/core_ext/array/extract_options'
 require 'active_support/core_ext/string'
+require 'blabbermouth/version'
 require 'blabbermouth/configuration'
 require 'blabbermouth/gawkers'
 require 'blabbermouth/blabber'
