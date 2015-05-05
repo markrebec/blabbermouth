@@ -1,14 +1,14 @@
 $:.push File.expand_path("../lib", __FILE__)
-require "blabbermouth/version"
+require "blabbermouth-rails/version"
 
 Gem::Specification.new do |s|
   s.name        = "blabbermouth-rails"
-  s.version     = Blabbermouth::VERSION
+  s.version     = Blabbermouth::RAILS_VERSION
   s.summary     = "Rails gawker for Blabbermouth"
   s.description = "Gawker for Blabbermouth that writes to the Rails Logger"
   s.authors     = ["Mark Rebec"]
   s.email       = ["mark@markrebec.com"]
-  s.files       = Dir["lib/blabbermouth-rails.rb", "lib/blabbermouth/version", "lib/blabbermouth/gawkers/rails.rb"]
+  s.files       = Dir["lib/blabbermouth-rails.rb", "lib/blabbermouth-rails/**/*", "lib/blabbermouth/gawkers/rails.rb"]
   s.test_files  = Dir["spec/support/rails.rb", "spec/blabbermouth/gawkers/rails.rb"]
   s.homepage    = "http://github.com/markrebec/blabbermouth"
 
