@@ -1,3 +1,4 @@
+require 'blabbermouth-rollbar'
 require 'spec_helper'
 
 RSpec.describe Blabbermouth::Gawkers::Rollbar do

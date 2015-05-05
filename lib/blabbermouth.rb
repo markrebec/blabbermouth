@@ -1,4 +1,5 @@
 require 'active_support/core_ext/module/attribute_accessors'
+require 'active_support/core_ext/string'
 require 'blabbermouth/configuration'
 require 'blabbermouth/gawkers'
 require 'blabbermouth/blabber'

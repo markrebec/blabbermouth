@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.description = "Flexible instrumentation/reporting library for pushing info, errors, counts, timing, etc. to various datastores like Librato, Rollbar, Rails logs or custom ActiveRecord models"
   s.authors     = ["Mark Rebec"]
   s.email       = ["mark@markrebec.com"]
-  s.files       = Dir["lib/**/*"]
-  s.test_files  = Dir["spec/**/*"]
+  s.files       = Dir["lib/blabbermouth.rb", "lib/blabbermouth/*.rb", "lib/blabbermouth/gawkers/{base,stdout}.rb"]
+  s.test_files  = Dir["spec/*.rb", "spec/support/{capture_stdout,gawker}.rb", "spec/blabbermouth/*.rb", "spec/blabbermouth/gawkers/{base_spec,stdout_spec}.rb"]
   s.homepage    = "http://github.com/markrebec/blabbermouth"
 
   s.add_dependency "activesupport"

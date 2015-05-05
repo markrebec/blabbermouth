@@ -1,4 +1,3 @@
-require 'active_support/core_ext/string'
 require 'blabbermouth'
 require 'rspec'
 

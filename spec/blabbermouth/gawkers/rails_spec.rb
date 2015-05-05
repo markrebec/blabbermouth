@@ -1,3 +1,4 @@
+require 'blabbermouth-rails'
 require 'spec_helper'
 
 RSpec.describe Blabbermouth::Gawkers::Rails do
