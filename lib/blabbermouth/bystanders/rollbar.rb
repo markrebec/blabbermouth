@@ -1,7 +1,7 @@
 require 'blabbermouth/exceptions'
 
 module Blabbermouth
-  module Gawkers
+  module Bystanders
     class Rollbar < Base
       def error(key, e, *args)
         data, opts, args = parse_args(*args)
@@ -40,7 +40,7 @@ module Blabbermouth
       end
 
       def rollbar!
-        raise "You must require and configure the rollbar gem to use it as a gawker" unless rollbar?
+        raise "You must require and configure the rollbar gem to use it as a bystander" unless rollbar?
       end
     end
   end

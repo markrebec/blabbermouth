@@ -1,7 +1,7 @@
 require 'blabbermouth-rollbar'
 require 'spec_helper'
 
-RSpec.describe Blabbermouth::Gawkers::Rollbar do
+RSpec.describe Blabbermouth::Bystanders::Rollbar do
   describe '#error' do
     it 'reports to rollbar' do
       subject.error('key', StandardError.new)

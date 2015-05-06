@@ -3,7 +3,7 @@ require 'active_support/core_ext/array/extract_options'
 require 'active_support/core_ext/string'
 require 'blabbermouth/version'
 require 'blabbermouth/configuration'
-require 'blabbermouth/gawkers'
+require 'blabbermouth/bystanders'
 require 'blabbermouth/blabber'
 
 module Blabbermouth
@@ -14,12 +14,12 @@ module Blabbermouth
     @@configuration.configure &block
   end
 
-  def self.blabber(*gawkers)
-    Blabbermouth::Blabber.new *gawkers
+  def self.blabber(*bystanders)
+    Blabbermouth::Blabber.new *bystanders
   end
 
-  def self.new(*gawkers)
-    blabber *gawkers
+  def self.new(*bystanders)
+    blabber *bystanders
   end
 
   def self.error(key, e, *args)

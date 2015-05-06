@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Blabbermouth::Gawkers::Base do
+RSpec.describe Blabbermouth::Bystanders::Base do
   describe '#error' do
     it 'raises NotImplementedError' do
       expect { subject.error('key', StandardError.new) }.to raise_exception(NotImplementedError)

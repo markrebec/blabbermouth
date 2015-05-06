@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Blabbermouth::Gawkers::Stdout do
+RSpec.describe Blabbermouth::Bystanders::Stdout do
   describe '#error' do
     it 'outputs to STDOUT' do
       expect(capture_stdout { subject.error('key', StandardError.new) }).to eql(subject.send(:log_message, :error, 'key', StandardError.new))

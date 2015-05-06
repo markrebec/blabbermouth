@@ -1,5 +1,5 @@
 module Blabbermouth
-  module Gawkers
+  module Bystanders
     class Librato < Base
       def error(key, e, *args)
         data, opts, args = parse_args(*args)
@@ -56,11 +56,11 @@ module Blabbermouth
       end
 
       def librato!
-        raise "You must require and configure the librato-metrics gem to use it as a gawker" unless librato?
+        raise "You must require and configure the librato-metrics gem to use it as a bystander" unless librato?
       end
 
       def librato_metrics!
-        raise "You must require and configure the librato-metrics gem to use it as a gawker" unless librato_metrics?
+        raise "You must require and configure the librato-metrics gem to use it as a bystander" unless librato_metrics?
       end
     end
   end

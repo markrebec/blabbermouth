@@ -1,7 +1,7 @@
 require 'blabbermouth-librato'
 require 'spec_helper'
 
-RSpec.describe Blabbermouth::Gawkers::Librato do
+RSpec.describe Blabbermouth::Bystanders::Librato do
   describe '#error' do
     it 'posts to librato' do
       subject.error('test.error', StandardError.new)

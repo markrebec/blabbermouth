@@ -1,5 +1,5 @@
 module Blabbermouth
-  module Gawkers
+  module Bystanders
     class Stdout < Base
       def error(key, e, *args)
         data, opts, args = parse_args(*args)

@@ -1,3 +1,3 @@
 # Blabbermouth
 
-Blabs your business to various datastores
+Blabs your business to listening bystanders

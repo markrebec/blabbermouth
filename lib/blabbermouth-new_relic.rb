@@ -1,2 +1,2 @@
 require 'blabbermouth'
-require 'blabbermouth/gawkers/new_relic'
+require 'blabbermouth/bystanders/new_relic'

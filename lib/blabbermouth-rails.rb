@@ -1,3 +1,3 @@
 require 'blabbermouth'
-require 'blabbermouth/gawkers/rails'
+require 'blabbermouth/bystanders/rails'
 require 'blabbermouth-rails/railtie'

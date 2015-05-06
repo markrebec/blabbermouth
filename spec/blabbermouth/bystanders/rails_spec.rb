@@ -1,7 +1,7 @@
 require 'blabbermouth-rails'
 require 'spec_helper'
 
-RSpec.describe Blabbermouth::Gawkers::Rails do
+RSpec.describe Blabbermouth::Bystanders::Rails do
   describe '#error' do
     it 'uses the rails logger' do
       subject.error('key', StandardError.new)

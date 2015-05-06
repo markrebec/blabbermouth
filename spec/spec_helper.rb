@@ -4,7 +4,7 @@ require 'rspec'
 Dir[File.join(File.dirname(__FILE__), '..', "spec/support/**/*.rb")].each { |f| require f }
 
 Blabbermouth.configure do |config|
-  config.gawkers = []
+  config.bystanders = []
 end
 
 RSpec.configure do |config|

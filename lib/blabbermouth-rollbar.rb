@@ -1,2 +1,2 @@
 require 'blabbermouth'
-require 'blabbermouth/gawkers/rollbar'
+require 'blabbermouth/bystanders/rollbar'

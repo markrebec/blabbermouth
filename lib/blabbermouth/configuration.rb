@@ -1,7 +1,7 @@
 module Blabbermouth
   class Configuration
     DEFAULT_CONFIGURATION_OPTIONS = {
-      gawkers: [:stdout]
+      bystanders: [:stdout]
     }
 
     attr_reader *DEFAULT_CONFIGURATION_OPTIONS.keys

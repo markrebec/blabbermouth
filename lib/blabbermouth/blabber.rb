@@ -1,84 +1,84 @@
 module Blabbermouth
   class Blabber
-    attr_reader :gawkers, :options
+    attr_reader :bystanders, :options
 
     class << self
       def parse_args(*args)
         opts = args.extract_options!
-        args = Blabbermouth.configuration.gawkers if args.empty?
-        gawkers = args + [opts.slice!(:data)]
-        [gawkers, opts]
+        args = Blabbermouth.configuration.bystanders if args.empty?
+        bystanders = args + [opts.slice!(:data)]
+        [bystanders, opts]
       end
 
       def error(key, e, *args)
-        gawkers, opts = parse_args(*args)
-        new(*gawkers).error(key, e, opts)
+        bystanders, opts = parse_args(*args)
+        new(*bystanders).error(key, e, opts)
       end
 
       def info(key, msg=nil, *args)
-        gawkers, opts = parse_args(*args)
-        new(*gawkers).info(key, msg, opts)
+        bystanders, opts = parse_args(*args)
+        new(*bystanders).info(key, msg, opts)
       end
 
       def increment(key, by=1, *args)
-        gawkers, opts = parse_args(*args)
-        new(*gawkers).increment(key, by, opts)
+        bystanders, opts = parse_args(*args)
+        new(*bystanders).increment(key, by, opts)
       end
 
       def count(key, total, *args)
-        gawkers, opts = parse_args(*args)
-        new(*gawkers).count(key, total, opts)
+        bystanders, opts = parse_args(*args)
+        new(*bystanders).count(key, total, opts)
       end
 
       def time(key, duration=nil, *args, &block)
-        gawkers, opts = parse_args(*args)
-        new(*gawkers).time(key, duration, opts, &block)
+        bystanders, opts = parse_args(*args)
+        new(*bystanders).time(key, duration, opts, &block)
       end
     end
 
-    def add_gawker!(gawker)
-      @gawkers ||= []
-      unless gawker_exists?(gawker)
-        @gawkers << "Blabbermouth::Gawkers::#{gawker.to_s.camelize}".constantize.new
+    def add_bystander!(bystander)
+      @bystanders ||= []
+      unless bystander_exists?(bystander)
+        @bystanders << "Blabbermouth::Bystanders::#{bystander.to_s.camelize}".constantize.new
       end
-      @gawkers
+      @bystanders
     end
 
-    def add_gawker(gawker)
-      add_gawker! gawker
+    def add_bystander(bystander)
+      add_bystander! bystander
     rescue => e
       false
     end
 
-    def remove_gawker!(gawker)
-      return if @gawkers.nil?
-      @gawkers.slice!(gawker_index(gawker), 1)
+    def remove_bystander!(bystander)
+      return if @bystanders.nil?
+      @bystanders.slice!(bystander_index(bystander), 1)
     end
 
-    def remove_gawker(gawker)
-      remove_gawker! gawker
+    def remove_bystander(bystander)
+      remove_bystander! bystander
     rescue => e
       false
     end
 
     def error(key, e, *args)
       opts = args.extract_options!
-      gawkers.map { |gawker| gawker.error key, e, *args.concat([gawker_options(gawker, opts)]) }
+      bystanders.map { |bystander| bystander.error key, e, *args.concat([bystander_options(bystander, opts)]) }
     end
 
     def info(key, msg=nil, *args)
       opts = args.extract_options!
-      gawkers.map { |gawker| gawker.info key, msg, *args.concat([gawker_options(gawker, opts)]) }
+      bystanders.map { |bystander| bystander.info key, msg, *args.concat([bystander_options(bystander, opts)]) }
     end
 
     def increment(key, by=1, *args)
       opts = args.extract_options!
-      gawkers.map { |gawker| gawker.increment key, by, *args.concat([gawker_options(gawker, opts)]) }
+      bystanders.map { |bystander| bystander.increment key, by, *args.concat([bystander_options(bystander, opts)]) }
     end
 
     def count(key, total, *args)
       opts = args.extract_options!
-      gawkers.map { |gawker| gawker.count key, total, *args.concat([gawker_options(gawker, opts)]) }
+      bystanders.map { |bystander| bystander.count key, total, *args.concat([bystander_options(bystander, opts)]) }
     end
 
     def time(key, duration=nil, *args, &block)
@@ -91,38 +91,38 @@ module Blabbermouth
         duration = (::Time.now - start_time).to_f
       end
 
-      gawkers.map { |gawker| gawker.time key, duration, *args.concat([gawker_options(gawker, opts)]) }
+      bystanders.map { |bystander| bystander.time key, duration, *args.concat([bystander_options(bystander, opts)]) }
     end
 
     def method_missing(meth, *args, &block)
-      gawkers.map do |gawker|
-        next unless gawker.respond_to?(meth)
-        gawker.send(meth, *args, &block)
+      bystanders.map do |bystander|
+        next unless bystander.respond_to?(meth)
+        bystander.send(meth, *args, &block)
       end
     end
 
     def respond_to_missing?(meth, include_private=false)
-      gawkers.any? { |gawker| gawker.respond_to?(meth, include_private) }
+      bystanders.any? { |bystander| bystander.respond_to?(meth, include_private) }
     end
 
     protected
 
-    def initialize(*gawks)
-      @options = gawks.extract_options!
-      gawks.concat(options.keys).uniq
-      gawks.each { |gawker| add_gawker! gawker }
+    def initialize(*bystdrs)
+      @options = bystdrs.extract_options!
+      bystdrs.concat(options.keys).uniq
+      bystdrs.each { |bystander| add_bystander! bystander }
     end
 
-    def gawker_options(gawker, opts={})
-     (@options[gawker.class.name.demodulize.underscore.to_sym] || {}).merge(opts)
+    def bystander_options(bystander, opts={})
+     (@options[bystander.class.name.demodulize.underscore.to_sym] || {}).merge(opts)
     end
 
-    def gawker_index(gawker)
-      @gawkers.index { |gawk| gawk.class.name.demodulize.underscore == gawker.to_s }
+    def bystander_index(bystander)
+      @bystanders.index { |bystdr| bystdr.class.name.demodulize.underscore == bystander.to_s }
     end
 
-    def gawker_exists?(gawker)
-      !gawker_index(gawker).nil?
+    def bystander_exists?(bystander)
+      !bystander_index(bystander).nil?
     end
   end
 end

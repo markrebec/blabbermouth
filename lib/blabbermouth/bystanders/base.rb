@@ -1,5 +1,5 @@
 module Blabbermouth
-  module Gawkers
+  module Bystanders
     class Base
       def error(key, e, *args)
         raise NotImplementedError, "#{self.class.name}##{__method__} has not been implemented"

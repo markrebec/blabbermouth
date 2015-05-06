@@ -1,5 +1,5 @@
 module Blabbermouth
-  module Gawkers
+  module Bystanders
     class NewRelic < Base
       def error(key, e, *args)
         super
@@ -28,7 +28,7 @@ module Blabbermouth
       end
 
       def new_relic!
-        raise "You must require and configure the newrelic_rpm gem to use it as a gawker" unless new_relic?
+        raise "You must require and configure the newrelic_rpm gem to use it as a bystander" unless new_relic?
       end
     end
   end

@@ -1,4 +1,10 @@
 class Rails
+  class Railtie
+    def self.initializer(*args, &block)
+      # noop
+    end
+  end
+
   class Logger
     attr_reader :infos, :errors
 
