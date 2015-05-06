@@ -1,2 +1,7 @@
 require 'blabbermouth'
-require 'blabbermouth/bystanders/librato'
+module Blabbermouth
+  module Librato
+  end
+end
+require 'blabbermouth/librato/version'
+require 'blabbermouth/librato/bystander'
