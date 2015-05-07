@@ -1,5 +1,11 @@
 # Blabbermouth
 
+[![Gem Version](https://badge.fury.io/rb/blabbermouth.png)](http://badge.fury.io/rb/blabbermouth)
+[![Build Status](https://travis-ci.org/markrebec/blabbermouth.png)](https://travis-ci.org/markrebec/blabbermouth)
+[![Code Climate](https://codeclimate.com/github/markrebec/blabbermouth.png)](https://codeclimate.com/github/markrebec/blabbermouth)
+[![Coverage Status](https://coveralls.io/repos/markrebec/blabbermouth/badge.png?branch=master)](https://coveralls.io/r/markrebec/blabbermouth?branch=master)
+[![Dependency Status](https://gemnasium.com/markrebec/blabbermouth.png)](https://gemnasium.com/markrebec/blabbermouth)
+
 An interface that blabs your business (errors, logging, instrumentation, etc.) to listening bystanders. There are a number of core bystanders provided, either built-in or through additional gems, for things like stdout, rails logger, rollbar, librato, etc.
 
 When using blabbermouth you can configure which bystanders are listening in to the events and messages being reported, which allows you to easily log/track/instrument your application across multiple services. For example, the `librato` and `rollbar` bystanders can be powerful when used alongside one another, in order to do things like graph success vs. error rates in Librato **and** report the full corresponding exceptions and backtraces to Rollbar.
