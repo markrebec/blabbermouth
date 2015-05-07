@@ -62,28 +62,23 @@ module Blabbermouth
     end
 
     def error(key, e, *args)
-      opts = args.extract_options!
-      bystanders.map { |bystander| bystander.error key, e, *args.concat([bystander_options(bystander, opts)]) }
+      blab :error, key, e, *args
     end
 
     def info(key, msg=nil, *args)
-      opts = args.extract_options!
-      bystanders.map { |bystander| bystander.info key, msg, *args.concat([bystander_options(bystander, opts)]) }
+      blab :info, key, msg, *args
     end
 
     def increment(key, by=1, *args)
-      opts = args.extract_options!
-      bystanders.map { |bystander| bystander.increment key, by, *args.concat([bystander_options(bystander, opts)]) }
+      blab :increment, key, by, *args
     end
 
     def count(key, total, *args)
-      opts = args.extract_options!
-      bystanders.map { |bystander| bystander.count key, total, *args.concat([bystander_options(bystander, opts)]) }
+      blab :count, key, total, *args
     end
 
     def time(key, duration=nil, *args, &block)
       raise "Blabbermouth::Blabber#time requires a duration or block" if duration.nil? && !block_given?
-      opts = args.extract_options!
 
       if block_given?
         start_time = ::Time.now
@@ -91,14 +86,19 @@ module Blabbermouth
         duration = (::Time.now - start_time).to_f
       end
 
-      bystanders.map { |bystander| bystander.time key, duration, *args.concat([bystander_options(bystander, opts)]) }
+      blab :time, key, duration, *args
+    end
+
+    def blab(meth, key, *args, &block)
+      opts = args.extract_options!
+      bystanders.map do |bystander|
+        next unless bystander.respond_to?(meth)
+        bystander.send meth, key, *args.concat([bystander_options(bystander, opts)]), &block
+      end
     end
 
     def method_missing(meth, *args, &block)
-      bystanders.map do |bystander|
-        next unless bystander.respond_to?(meth)
-        bystander.send(meth, *args, &block)
-      end
+      blab meth, *args, &block
     end
 
     def respond_to_missing?(meth, include_private=false)
