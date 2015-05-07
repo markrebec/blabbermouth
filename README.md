@@ -82,9 +82,9 @@ You can also instantiate a `Blabbermouth::Blabber` object, pre-configured with b
 
     # create a blabber that will blab to the rails log and to librato
     blabber = Blabbermouth::Blabber.new(:rails, :librato) # Blabbermouth.new will also work
-    blabber.increment('my_app.my_key') # increment a librato counter by 1 and log the increment value to the rails log
+    blabber.increment('my_app.my_key') # increment a librato counter by 1 and log the increment action to the rails log
 
-If you happen to be using a custom bystander and you've defined additional methods you'd like to use with blabbermouth, there is some metaprogramming to allow you to do so fairly easily. You cannot use the direct `Blabbermouth.my_method` module methods, but you can instantiate a `Blabbermouth::Blabber` with your bystander and call your method through object. For example, if you've defined a bystander that has a `gauge` method (which is not defined currently as part of the core set of methods), you can still call that method through your blabber object:
+If you happen to be using a custom bystander and you've defined additional methods you'd like to use with blabbermouth, there is some metaprogramming to allow you to do so fairly easily. You cannot use the direct `Blabbermouth.my_method` syntax, but you can instantiate a `Blabbermouth::Blabber` with your bystander and call your method through that object. For example, if you've defined a bystander that has a `gauge` method (which is not defined currently as part of the core set of methods), you can still call that method through your blabber object:
 
     # create a blabber using your custom bystander
     blabber = Blabbermouth::Blabber.new(:my_bystander)
