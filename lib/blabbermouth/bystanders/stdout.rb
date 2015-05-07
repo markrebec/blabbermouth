@@ -2,28 +2,28 @@ module Blabbermouth
   module Bystanders
     class Stdout < Base
       def error(key, e, *args)
-        data, opts, args = parse_args(*args)
-        puts :error, key, e.message, data
+        blab :error, key, e, *args
       end
 
       def info(key, msg=nil, *args)
-        data, opts, args = parse_args(*args)
-        puts :info, key, msg, data
+        blab :info, key, msg, *args
       end
 
       def increment(key, by=1, *args)
-        data, opts, args = parse_args(*args)
-        puts :increment, key, by, data
+        blab :increment, key, by, *args
       end
 
       def count(key, total, *args)
-        data, opts, args = parse_args(*args)
-        puts :count, key, total, data
+        blab :count, key, total, *args
       end
 
-      def time(key, value=nil, *args)
+      def time(key, duration, *args)
+        blab :time, key, duration, *args
+      end
+
+      def blab(meth, key, value, *args)
         data, opts, args = parse_args(*args)
-        puts :time, key, value, data
+        puts meth, key, value, data
       end
 
       protected
