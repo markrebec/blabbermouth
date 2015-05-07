@@ -1,5 +1,6 @@
+require 'blabbermouth/version'
 module Blabbermouth
   module Rollbar
-    VERSION = '0.0.5'
+    VERSION = Blabbermouth::VERSION
   end
 end
