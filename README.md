@@ -1,7 +1,7 @@
 # Blabbermouth
 
 [![Build Status](https://travis-ci.org/markrebec/blabbermouth.png)](https://travis-ci.org/markrebec/blabbermouth)
-[![Coverage Status](https://coveralls.io/repos/markrebec/blabbermouth/badge.svg)](https://coveralls.io/r/markrebec/blabbermouth)
+[![Coverage Status](https://coveralls.io/repos/markrebec/blabbermouth/badge.svg?1=1)](https://coveralls.io/r/markrebec/blabbermouth)
 [![Code Climate](https://codeclimate.com/github/markrebec/blabbermouth.png)](https://codeclimate.com/github/markrebec/blabbermouth)
 [![Gem Version](https://badge.fury.io/rb/blabbermouth.png)](http://badge.fury.io/rb/blabbermouth)
 [![Dependency Status](https://gemnasium.com/markrebec/blabbermouth.png)](https://gemnasium.com/markrebec/blabbermouth)
