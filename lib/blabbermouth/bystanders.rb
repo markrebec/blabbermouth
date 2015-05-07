@@ -4,4 +4,5 @@ module Blabbermouth
 end
 
 require 'blabbermouth/bystanders/base'
+require 'blabbermouth/bystanders/formatter'
 require 'blabbermouth/bystanders/stdout'
