@@ -41,4 +41,8 @@ module Blabbermouth
   def self.time(key, duration=nil, *args, &block)
     Blabbermouth::Blabber.time key, duration, *args, &block
   end
+
+  def self.flush(*args)
+    Blabbermouth::Blabber.flush *args
+  end
 end

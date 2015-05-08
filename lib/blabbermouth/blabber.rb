@@ -34,6 +34,11 @@ module Blabbermouth
         bystanders, opts = parse_args(*args)
         new(*bystanders).time(key, duration, opts, &block)
       end
+
+      def flush(*args)
+        bystanders, opts = parse_args(*args)
+        new(*bystanders).flush
+      end
     end
 
     def add_bystander!(bystander)
@@ -95,6 +100,13 @@ module Blabbermouth
         next unless bystander.respond_to?(meth)
         bystander_args = args.dup.push(bystander_options(bystander, opts))
         bystander.send meth, key, *bystander_args, &block
+      end
+    end
+
+    def flush
+      bystanders.map do |bystander|
+        next unless bystander.respond_to?(:flush)
+        bystander.flush
       end
     end
 
