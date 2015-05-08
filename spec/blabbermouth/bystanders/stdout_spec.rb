@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 RSpec.describe Blabbermouth::Bystanders::Stdout do
+  it 'responds to dynamic event methods' do
+    expect(capture_stdout { subject.custom('blabbermouth.test.custom') }).to eql(subject.send(:log_message, :custom, 'blabbermouth.test.custom', nil))
+  end
+
   describe '#error' do
     it 'outputs to STDOUT' do
       expect(capture_stdout { subject.error('key', StandardError.new) }).to eql(subject.send(:log_message, :error, 'key', StandardError.new))

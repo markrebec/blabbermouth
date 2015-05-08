@@ -2,6 +2,7 @@ module Blabbermouth
   module Bystanders
     class Stdout < Base
       include Blabbermouth::Bystanders::Formatter
+      include Blabbermouth::Bystanders::DynamicEvents
 
       def error(key, e, *args)
         blab :error, key, e, *args

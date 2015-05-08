@@ -2,6 +2,11 @@ require 'blabbermouth-rails'
 require 'spec_helper'
 
 RSpec.describe Blabbermouth::Bystanders::Rails do
+  it 'responds to dynamic event methods' do
+    subject.custom('blabbermouth.test.custom')
+    expect(Rails.logger.infos).to include(subject.send(:log_message, :custom, 'blabbermouth.test.custom', nil))
+  end
+
   describe '#error' do
     it 'uses the rails logger' do
       subject.error('key', StandardError.new)
