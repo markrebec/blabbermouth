@@ -143,6 +143,10 @@ The [`librato-metrics`](https://github.com/librato/librato-metrics) gem is a dep
 
 Not Yet Implemented
 
+### Redis
+
+Not Yet Implemented
+
 ## Custom Bystanders
 
 **TODO document creating your own custom bystanders**
