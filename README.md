@@ -75,6 +75,9 @@ This will use the default configured bystander(s), but you can also override tho
 # blabs an error to librato and rollbar, will NOT post to the default bystanders
 Blabbermouth.error('my_app.some_action.failed', e, :rollbar, :librato, data: {key: 'value'})
 
+# you can also instantiate an object and call your method on that if you prefer that syntax (I usually do :)
+Blabbermouth.new(:rollbar, :librato).error('my_app.some_action.failed', e, data: {key: 'value'})
+
 # if you want to post to your default bystander as well, you'll have to specify it
 # this example assumes your default bystander is configured as :stdout
 Blabbermouth.error('my_app.some_action.failed', e, :stdout, :rollbar, :librato)
