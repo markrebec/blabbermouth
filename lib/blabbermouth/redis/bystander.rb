@@ -1,6 +1,6 @@
 module Blabbermouth
   module Bystanders
-    class NewRelic < Base
+    class Redis < Base
       def error(key, e, *args)
         super
       end
@@ -17,18 +17,8 @@ module Blabbermouth
         super
       end
 
-      def time(key, duration=nil, *args)
+      def time(key, duration, *args)
         super
-      end
-
-      protected
-
-      def new_relic?
-        defined?(::NewRelic)
-      end
-
-      def new_relic!
-        raise "You must require and configure the newrelic_rpm gem to use it as a bystander" unless new_relic?
       end
     end
   end

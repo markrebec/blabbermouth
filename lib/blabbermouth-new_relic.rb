@@ -1,2 +1,7 @@
 require 'blabbermouth'
-require 'blabbermouth/bystanders/new_relic'
+module Blabbermouth
+  module NewRelic
+  end
+end
+require 'blabbermouth/new_relic/version'
+require 'blabbermouth/new_relic/bystander'
