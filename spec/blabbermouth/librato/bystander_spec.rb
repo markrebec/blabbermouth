@@ -9,10 +9,17 @@ RSpec.describe Blabbermouth::Bystanders::Librato do
     end
   end
 
+  describe '#annotate' do
+    it 'posts to librato' do
+      subject.annotate('test.annotate', 'test')
+      expect(Librato::Metrics.annotations['test.annotate']).to include('test')
+    end
+  end
+
   describe '#info' do
     it 'posts to librato' do
       subject.info('test.info', 'test')
-      expect(Librato::Metrics.annotations['test.info']).to include('test')
+      expect(Librato.increments['test.info']).to eql(1)
     end
   end
 

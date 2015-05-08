@@ -6,13 +6,17 @@ module Blabbermouth
         ::Librato.increment(key, opts)
       end
 
-      def info(key, msg=nil, *args)
+      def annotate(key, msg=nil, *args)
         data, opts, args = parse_args(*args)
         begin
           ::Librato::Metrics.annotate(key, msg, opts)
         rescue => e
           STDOUT.puts "[librato] submission failed permanently: #{e.message}"
         end
+      end
+
+      def info(key, msg=nil, *args)
+        increment(key, 1, *args)
       end
 
       def increment(key, by=1, *args)
