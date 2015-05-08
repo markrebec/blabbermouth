@@ -7,7 +7,7 @@ module Blabbermouth
         key = args.slice!(0,1).first
         value = args.slice!(0,1).first
         data.merge!({args: args}) unless args.empty?
-        blab meth, key, value, data
+        blab meth, key, value, data: data
       end
 
       def respond_to_missing?(meth, include_private=false)
