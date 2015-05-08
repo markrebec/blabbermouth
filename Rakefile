@@ -25,6 +25,8 @@ task :push do
   puts `gem push blabbermouth-librato-#{Blabbermouth::VERSION}.gem`
 end
 
-task release: [:build, :push]
+task release: [:build, :push] do
+  puts `rm -f blabbermouth*.gem`
+end
 
 task :default => :spec
