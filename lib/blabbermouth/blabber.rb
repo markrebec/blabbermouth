@@ -44,7 +44,7 @@ module Blabbermouth
     def add_bystander!(bystander)
       @bystanders ||= []
       unless bystander_exists?(bystander)
-        @bystanders << "Blabbermouth::Bystanders::#{bystander.to_s.camelize}".constantize.new
+        @bystanders << "Blabbermouth::Bystanders::#{bystander.to_s.camelize}".constantize.new(@options[bystander] || {})
       end
       @bystanders
     end
@@ -53,6 +53,12 @@ module Blabbermouth
       add_bystander! bystander
     rescue => e
       false
+    end
+
+    def add_bystanders(*bystdrs)
+      @options.merge!(bystdrs.extract_options!)
+      bystdrs.concat(options.keys).uniq
+      bystdrs.each { |bystander| add_bystander! bystander }
     end
 
     def remove_bystander!(bystander)
@@ -121,9 +127,8 @@ module Blabbermouth
     protected
 
     def initialize(*bystdrs)
-      @options = bystdrs.extract_options!
-      bystdrs.concat(options.keys).uniq
-      bystdrs.each { |bystander| add_bystander! bystander }
+      @options = {}
+      add_bystanders *bystdrs
     end
 
     def bystander_options(bystander, opts={})
