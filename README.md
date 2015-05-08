@@ -121,19 +121,23 @@ There are a number of core bystanders you can use to get started. The `stdout` b
 
 ### Stdout
 
-The `stdout` bystander is built-in and provided with the core `blabbermouth` gem. It will format any messages sent to it and log them to standard output. In the future I'd like to provide a way to override the formatting of the logged messages (more easily than monkeypatching the `Stdout#log_message` method or extending to your own custom bystander and overriding that method).
+The `:stdout` bystander is built-in and provided with the core `blabbermouth` gem. It will format any messages sent to it and log them to standard output. In the future I'd like to provide a way to override the formatting of the logged messages (more easily than monkeypatching the `Stdout#log_message` method or extending to your own custom bystander and overriding that method).
 
 ### Rails
 
-The `rails` bystander is provided by the `blabbermouth-rails` gem and is similar to the `stdout` bystander, except it logs messages using the default configured `Rails.logger`.
+The `:rails` bystander is provided by the `blabbermouth-rails` gem and is similar to the `stdout` bystander, except it logs messages using the default configured `Rails.logger`.
 
 ### Rollbar
 
-The `rollbar` bystander is provided by the `blabbermouth-rollbar` gem. It logs your messages to [Rollbar](http://rollbar.com), which can be useful for logging errors and other info because it can be configured to pass along lots of additional data about requests, sessions, etc.
+The `:rollbar` bystander is provided by the `blabbermouth-rollbar` gem. It logs your messages to [Rollbar](http://rollbar.com), which can be useful for logging errors and other info because it can be configured to pass along lots of additional data about requests, sessions, etc.
+
+The [`rollbar`](https://github.com/rollbar/rollbar-gem) gem is a dependency of `blabbermouth-rollbar` so you don't need to require it separately, but you will need to configure it and provide credentials the same way you would if you were using it directly.
 
 ### Librato
 
-The `librato` bystander is provided by the `blabbermouth-librato` gem, and will ping [Librato](http://librato.com). Librato provides excellent tools to instrument various actions in your application, and it's a great way to track things like background jobs, execution time/performance in production environments, etc. 
+The `:librato` bystander is provided by the `blabbermouth-librato` gem, and will ping [Librato](http://librato.com). Librato provides excellent tools to instrument various actions in your application, and it's a great way to track things like background jobs, execution time/performance in production environments, etc. 
+
+The [`librato-metrics`](https://github.com/librato/librato-metrics) gem is a dependency of `blabbermouth-librato` so you don't need to require it separately, but you will need to configure it and provide credentials the same way you would if you were using it directly.
 
 ### New Relic
 
