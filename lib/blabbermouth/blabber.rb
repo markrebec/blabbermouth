@@ -93,7 +93,8 @@ module Blabbermouth
       opts = args.extract_options!
       bystanders.map do |bystander|
         next unless bystander.respond_to?(meth)
-        bystander.send meth, key, *args.concat([bystander_options(bystander, opts)]), &block
+        bystander_args = args.dup.push(bystander_options(bystander, opts))
+        bystander.send meth, key, *bystander_args, &block
       end
     end
 

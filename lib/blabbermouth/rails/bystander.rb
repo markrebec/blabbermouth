@@ -24,9 +24,9 @@ module Blabbermouth
         blab :time, key, duration, *args
       end
 
-      def blab(meth, key, value, *args)
+      def blab(meth, key, *args)
         data, opts, args = parse_args(*args)
-        log meth, key, value, data
+        log meth, key, args.first, data
       end
 
       protected
