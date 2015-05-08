@@ -20,6 +20,17 @@ module Blabbermouth
       def time(key, duration, *args)
         super
       end
+
+      protected
+
+      def initialize(*args)
+        # TODO allow passing redis config arguments through Blabbermouth::Blabber.new
+        # TODO should also add default Blabbermouth.configuration.redis config
+      end
+
+      def redis
+        @redis ||= Redis.new
+      end
     end
   end
 end
