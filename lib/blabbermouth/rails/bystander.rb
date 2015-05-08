@@ -31,16 +31,12 @@ module Blabbermouth
 
       protected
 
-      def rails?
-        defined?(::Rails) && ::Rails.respond_to?(:logger)
-      end
-
       def log(event, key, msg, data={})
         message = log_message(event, key, msg, data)
         if event == :error
-          rails? ? ::Rails.logger.error(message) : puts(message)
+          ::Rails.logger.error(message)
         else
-          rails? ? ::Rails.logger.info(message) : puts(message)
+          ::Rails.logger.info(message)
         end
       end
     end
