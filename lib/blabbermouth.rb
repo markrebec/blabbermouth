@@ -1,17 +1,16 @@
 require 'active_support/core_ext/module/attribute_accessors'
 require 'active_support/core_ext/array/extract_options'
 require 'active_support/core_ext/string'
+require 'canfig'
 require 'blabbermouth/version'
-require 'blabbermouth/configuration'
 require 'blabbermouth/bystanders'
 require 'blabbermouth/blabber'
 
 module Blabbermouth
-  mattr_reader :configuration
-  @@configuration = Blabbermouth::Configuration.new
+  include Canfig::Module
 
-  def self.configure(&block)
-    @@configuration.configure &block
+  configure do |config|
+    config.bystanders = [:stdout]
   end
 
   def self.blabber(*bystanders)

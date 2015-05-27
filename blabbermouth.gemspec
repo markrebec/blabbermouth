@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.homepage    = "http://github.com/markrebec/blabbermouth"
 
   s.add_dependency "activesupport"
+  s.add_dependency "canfig"
 
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec"
