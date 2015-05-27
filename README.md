@@ -154,6 +154,16 @@ Not Yet Implemented
 
 **TODO document creating your own custom bystanders**
 
+## Testing
+
+Since any code that uses blabbermouth will blab to the configured bystanders, you might be seeing output or sending data to third party services when running tests (depending on your configuration). If you want to disable this, you can gag blabbermouth by setting the `gagged` configuration option in your test environment. For example:
+
+```ruby
+Blabbermouth.configure do |config|
+  config.gagged = Rails.env.test?
+end
+```
+
 ## Contributing
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
