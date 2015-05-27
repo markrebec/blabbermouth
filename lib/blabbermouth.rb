@@ -11,6 +11,7 @@ module Blabbermouth
 
   configure do |config|
     config.bystanders = [:stdout]
+    config.gagged = false
   end
 
   def self.blabber(*bystanders)

@@ -105,7 +105,7 @@ module Blabbermouth
       bystanders.map do |bystander|
         next unless bystander.respond_to?(meth)
         bystander_args = args.dup.push(bystander_options(bystander, opts))
-        bystander.send meth, key, *bystander_args, &block
+        bystander.send meth, key, *bystander_args, &block unless Blabbermouth.configuration.gagged == true
       end
     end
 
