@@ -80,7 +80,7 @@ Blabbermouth.new(:rollbar, :librato).error('my_app.some_action.failed', e, data:
 
 # if you want to post to your default bystander as well, you'll have to specify it
 # this example assumes your default bystander is configured as :stdout
-Blabbermouth.error('my_app.some_action.failed', e, :stdout, :rollbar, :librato)
+Blabbermouth.new(:stdout, :rollbar, :librato).error('my_app.some_action.failed', e)
 
 # or you could reference the configured defaults to be a bit more dynamic
 bystanders = Blabbermouth.configuration.bystanders + [:rollbar, :librato]
