@@ -126,6 +126,10 @@ There are a number of core bystanders you can use to get started. The `stdout` b
 
 The `:stdout` bystander is built-in and provided with the core `blabbermouth` gem. It will format any messages sent to it and log them to standard output. In the future I'd like to provide a way to override the formatting of the logged messages (more easily than monkeypatching the `Stdout#log_message` method or extending to your own custom bystander and overriding that method).
 
+### Syslog
+
+The `:syslog` bystander is provided by the `blabbermouth-syslog` gem and is similar to the `stdout` bystander, except it logs messages using the default configured `Syslog::Logger`.
+
 ### Rails
 
 The `:rails` bystander is provided by the `blabbermouth-rails` gem and is similar to the `stdout` bystander, except it logs messages using the default configured `Rails.logger`.
@@ -138,7 +142,7 @@ The [`rollbar`](https://github.com/rollbar/rollbar-gem) gem is a dependency of `
 
 ### Librato
 
-The `:librato` bystander is provided by the `blabbermouth-librato` gem, and will ping [Librato](http://librato.com). Librato provides excellent tools to instrument various actions in your application, and it's a great way to track things like background jobs, execution time/performance in production environments, etc. 
+The `:librato` bystander is provided by the `blabbermouth-librato` gem, and will ping [Librato](http://librato.com). Librato provides excellent tools to instrument various actions in your application, and it's a great way to track things like background jobs, execution time/performance in production environments, etc.
 
 The [`librato-metrics`](https://github.com/librato/librato-metrics) gem is a dependency of `blabbermouth-librato` so you don't need to require it separately, but you will need to configure it and provide credentials the same way you would if you were using it directly.
 
