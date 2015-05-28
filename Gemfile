@@ -1,5 +1,6 @@
 source "http://rubygems.org"
 gemspec name: 'blabbermouth'
+gemspec name: 'blabbermouth-syslog'
 gemspec name: 'blabbermouth-rails'
 gemspec name: 'blabbermouth-rollbar'
 gemspec name: 'blabbermouth-librato'
