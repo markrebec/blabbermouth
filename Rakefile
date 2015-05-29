@@ -12,6 +12,7 @@ end
 
 task :build do
   puts `gem build blabbermouth.gemspec`
+  puts `gem build blabbermouth-syslog.gemspec`
   puts `gem build blabbermouth-rails.gemspec`
   puts `gem build blabbermouth-rollbar.gemspec`
   puts `gem build blabbermouth-librato.gemspec`
@@ -20,6 +21,7 @@ end
 task :push do
   require 'blabbermouth/version'
   puts `gem push blabbermouth-#{Blabbermouth::VERSION}.gem`
+  puts `gem push blabbermouth-syslog-#{Blabbermouth::VERSION}.gem`
   puts `gem push blabbermouth-rails-#{Blabbermouth::VERSION}.gem`
   puts `gem push blabbermouth-rollbar-#{Blabbermouth::VERSION}.gem`
   puts `gem push blabbermouth-librato-#{Blabbermouth::VERSION}.gem`
