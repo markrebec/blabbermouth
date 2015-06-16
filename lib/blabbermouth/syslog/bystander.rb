@@ -52,7 +52,7 @@ module Blabbermouth
       protected
 
       def syslog
-        @syslog ||= Syslog::Logger.new 'blabbermouth'
+        @syslog ||= ::Syslog::Logger.new 'blabbermouth'
       end
 
       def log(event, key, msg, data={})
