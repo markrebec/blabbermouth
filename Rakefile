@@ -16,6 +16,7 @@ task :build do
   puts `gem build blabbermouth-rails.gemspec`
   puts `gem build blabbermouth-rollbar.gemspec`
   puts `gem build blabbermouth-librato.gemspec`
+  puts `gem build blabbermouth-new_relic.gemspec`
 end
 
 task :push do
@@ -25,6 +26,7 @@ task :push do
   puts `gem push blabbermouth-rails-#{Blabbermouth::VERSION}.gem`
   puts `gem push blabbermouth-rollbar-#{Blabbermouth::VERSION}.gem`
   puts `gem push blabbermouth-librato-#{Blabbermouth::VERSION}.gem`
+  puts `gem push blabbermouth-new_relic-#{Blabbermouth::VERSION}.gem`
 end
 
 task release: [:build, :push] do
