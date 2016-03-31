@@ -2,23 +2,23 @@ module Blabbermouth
   module Bystanders
     class NewRelic < Base
       def error(key, e, *args)
-        super
+        ::NewRelic::Agent.notice_error(e, (args.extract_options! || {}).merge(key: key))
       end
 
       def info(key, msg=nil, *args)
-        super
+        ::NewRelic::Agent.record_custom_event(key, (args.extract_options! || {}).merge({message: msg}))
       end
 
       def increment(key, by=1, *args)
-        super
+        ::NewRelic::Agent.increment_metric(key, by)
       end
 
       def count(key, total, *args)
-        super
+        ::NewRelic::Agent.record_metric(key, total)
       end
 
       def time(key, duration=nil, *args)
-        super
+        ::NewRelic::Agent.record_custom_event(key, (args.extract_options! || {}).merge({duration: duration}))
       end
     end
   end
