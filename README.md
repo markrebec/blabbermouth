@@ -148,7 +148,7 @@ The [`librato-metrics`](https://github.com/librato/librato-metrics) gem is a dep
 
 ### New Relic
 
-Not Yet Implemented
+The `:new_relic` bystander is provided by the `blabbermouth-new_relic` gem, and will log your errors, messages and metrics with [NewRelic](http://newrelic.com) using your application's configured `NewRelic::Agent`, which is provided by the [newrelic_rpm](https://github.com/newrelic/rpm) gem.
 
 ### Redis
 
