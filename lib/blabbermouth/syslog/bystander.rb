@@ -19,6 +19,7 @@ module Blabbermouth
       def fatal(key, e, *args)
         relay :fatal, key, e, *args
       end
+      alias_method :critical, :fatal
 
       def info(key, msg=nil, *args)
         relay :info, key, msg, *args
@@ -31,6 +32,7 @@ module Blabbermouth
       def warn(key, msg=nil, *args)
         relay :warn, key, msg, *args
       end
+      alias_method :warning, :warn
 
       def time(key, duration, *args)
         relay :time, key, duration, *args
@@ -47,6 +49,13 @@ module Blabbermouth
       def relay(meth, key, *args)
         data, opts, args = parse_args(*args)
         log meth, key, args.first, data
+      end
+
+      def log_message(event, key, msg, data={})
+        message = "Blabbermouth.#{event.to_s}: #{key.to_s}"
+        message += ": #{msg.to_s}" unless msg.to_s.blank?
+        message += " #{data.to_s}"
+        message
       end
 
       protected
