@@ -76,6 +76,18 @@ module Blabbermouth
       blab :error, key, e, *args
     end
 
+    def critical(key, e, *args)
+      blab :critical, key, e, *args
+    end
+
+    def warning(key, e=nil, *args)
+      blab :warning, key, e, *args
+    end
+
+    def debug(key, e=nil, *args)
+      blab :debug, key, e, *args
+    end
+
     def info(key, msg=nil, *args)
       blab :info, key, msg, *args
     end

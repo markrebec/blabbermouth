@@ -8,6 +8,18 @@ module Blabbermouth
         relay :error, key, e, *args
       end
 
+      def critical(key, e, *args)
+        relay :critical, key, e, *args
+      end
+
+      def warning(key, e=nil, *args)
+        relay :warning, key, e, *args
+      end
+
+      def debug(key, e=nil, *args)
+        relay :debug, key, e, *args
+      end
+
       def info(key, msg=nil, *args)
         relay :info, key, msg, *args
       end
@@ -33,7 +45,7 @@ module Blabbermouth
 
       def log(event, key, msg, data={})
         message = log_message(event, key, msg, data)
-        if event == :error
+        if [:error, :critical].include?(event)
           ::Rails.logger.error(message)
         else
           ::Rails.logger.info(message)

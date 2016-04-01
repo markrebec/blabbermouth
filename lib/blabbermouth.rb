@@ -26,6 +26,18 @@ module Blabbermouth
     Blabbermouth::Blabber.error key, e, *args
   end
 
+  def self.critical(key, e, *args)
+    Blabbermouth::Blabber.critical key, e, *args
+  end
+
+  def self.warning(key, e=nil, *args)
+    Blabbermouth::Blabber.warning key, e, *args
+  end
+
+  def self.debug(key, e=nil, *args)
+    Blabbermouth::Blabber.debug key, e, *args
+  end
+
   def self.info(key, msg=nil, *args)
     Blabbermouth::Blabber.info key, msg, *args
   end

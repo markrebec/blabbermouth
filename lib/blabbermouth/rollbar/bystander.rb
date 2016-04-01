@@ -7,6 +7,18 @@ module Blabbermouth
         ::Rollbar.error(Blabbermouth::Error.new(key, e), data)
       end
 
+      def critical(key, e, data: {})
+        ::Rollbar.critical(Blabbermouth::Critical.new(key, e), data)
+      end
+
+      def debug(key, e=nil, data: {})
+        ::Rollbar.debug(Blabbermouth::Debug.new(key, e), data)
+      end
+
+      def warning(key, e=nil, data: {})
+        ::Rollbar.warning(Blabbermouth::Warning.new(key, e), data)
+      end
+
       def info(key, msg=nil, data: {})
         ::Rollbar.info(Blabbermouth::Info.new(key, msg), data)
       end

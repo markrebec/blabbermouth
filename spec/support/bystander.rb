@@ -16,6 +16,21 @@ module Blabbermouth
         log :error, key, e.message, data
       end
 
+      def critical(key, e, *args)
+        data, opts, args = parse_args(*args)
+        log :critical, key, e.message, data
+      end
+
+      def warning(key, e=nil, *args)
+        data, opts, args = parse_args(*args)
+        log :warning, key, e.message, data
+      end
+
+      def debug(key, e=nil, *args)
+        data, opts, args = parse_args(*args)
+        log :debug, key, e.message, data
+      end
+
       def info(key, msg=nil, *args)
         data, opts, args = parse_args(*args)
         log :info, key, msg, data

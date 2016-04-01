@@ -32,6 +32,36 @@ RSpec.describe Blabbermouth::Blabber do
     end
   end
 
+  describe '#critical' do
+    it 'blabs to any added bystanders' do
+      subject.add_bystander!(:test)
+      subject.add_bystander!(:rails)
+      subject.critical('key', StandardError.new)
+      expect(Blabbermouth::Bystanders::Test.logged?(:critical, 'key', StandardError.new.message)).to be_true
+      expect(Rails.logger.errors).to include(Blabbermouth::Bystanders::Rails.new.send(:log_message, :critical, 'key', StandardError.new))
+    end
+  end
+
+  describe '#warning' do
+    it 'blabs to any added bystanders' do
+      subject.add_bystander!(:test)
+      subject.add_bystander!(:rails)
+      subject.warning('key', StandardError.new)
+      expect(Blabbermouth::Bystanders::Test.logged?(:warning, 'key', StandardError.new.message)).to be_true
+      expect(Rails.logger.infos).to include(Blabbermouth::Bystanders::Rails.new.send(:log_message, :warning, 'key', StandardError.new))
+    end
+  end
+
+  describe '#debug' do
+    it 'blabs to any added bystanders' do
+      subject.add_bystander!(:test)
+      subject.add_bystander!(:rails)
+      subject.debug('key', StandardError.new)
+      expect(Blabbermouth::Bystanders::Test.logged?(:debug, 'key', StandardError.new.message)).to be_true
+      expect(Rails.logger.infos).to include(Blabbermouth::Bystanders::Rails.new.send(:log_message, :debug, 'key', StandardError.new))
+    end
+  end
+
   describe '#info' do
     it 'blabs to any added bystanders' do
       subject.add_bystander!(:test)

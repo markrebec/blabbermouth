@@ -14,6 +14,27 @@ RSpec.describe Blabbermouth::Bystanders::Rails do
     end
   end
 
+  describe '#critical' do
+    it 'uses the rails logger' do
+      subject.critical('key', StandardError.new)
+      expect(Rails.logger.errors).to include(subject.send(:log_message, :critical, 'key', StandardError.new))
+    end
+  end
+
+  describe '#warning' do
+    it 'uses the rails logger' do
+      subject.warning('key', 'test')
+      expect(Rails.logger.infos).to include(subject.send(:log_message, :warning, 'key', 'test'))
+    end
+  end
+
+  describe '#debug' do
+    it 'uses the rails logger' do
+      subject.debug('key', 'test')
+      expect(Rails.logger.infos).to include(subject.send(:log_message, :debug, 'key', 'test'))
+    end
+  end
+
   describe '#info' do
     it 'uses the rails logger' do
       subject.info('key', 'test')
