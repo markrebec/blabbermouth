@@ -1,11 +1,11 @@
 module Blabbermouth
   class Error < ::StandardError
     def initialize(key, e=nil)
-      if e.present?
-        super("#{key}: #{e.message}")
+      if e.is_a?(Exception)
+        super("#{key}: #{e.class.name}: #{e.message}")
         set_backtrace e.backtrace
       else
-        super("#{key}: No exception given")
+        super("#{key}: #{e.to_s}")
         set_backtrace caller
       end
     end
