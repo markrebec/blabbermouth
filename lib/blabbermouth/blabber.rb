@@ -15,6 +15,21 @@ module Blabbermouth
         new(*bystanders).error(key, e, opts)
       end
 
+      def critical(key, e, *args)
+        bystanders, opts = parse_args(*args)
+        new(*bystanders).critical(key, e, opts)
+      end
+
+      def warning(key, e, *args)
+        bystanders, opts = parse_args(*args)
+        new(*bystanders).warning(key, e, opts)
+      end
+
+      def debug(key, e, *args)
+        bystanders, opts = parse_args(*args)
+        new(*bystanders).debug(key, e, opts)
+      end
+
       def info(key, msg=nil, *args)
         bystanders, opts = parse_args(*args)
         new(*bystanders).info(key, msg, opts)
