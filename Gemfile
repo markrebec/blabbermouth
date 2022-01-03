@@ -1,10 +1,5 @@
 source "http://rubygems.org"
-gemspec name: 'blabbermouth'
-gemspec name: 'blabbermouth-syslog'
-gemspec name: 'blabbermouth-rails'
-gemspec name: 'blabbermouth-rollbar'
-gemspec name: 'blabbermouth-librato'
-gemspec name: 'blabbermouth-redis'
-gemspec name: 'blabbermouth-new_relic'
+gemspec
 
-gem 'coveralls', require: false
+gem 'coveralls', groups: [:development, :test], require: false
+gem 'solargraph', groups: [:development, :test], require: false
