@@ -127,7 +127,7 @@ module Blabbermouth
               .map { |l| l.gsub(Rails.root.to_s, '.').split(':')[0..1].join(':') }
               .slice(0..5)
             # TODO better event severity
-            Rails.logger.event name, duration: ((finish - start) * 1000.0), backtrace: stack, severity: :debug, **payload
+            Rails.logger.event name, duration: ((finish - start) * 1000.0), backtrace: stack, severity: :debug, **payload.except(:connection, :binds)
           end
         end
 
